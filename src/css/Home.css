@@ -1,0 +1,61 @@
+/* Home.css */
+
+.home-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fdfdfd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.home-title {
+  text-align: center;
+  color: #3b82f6;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  width: 60%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  font-size: 1rem;
+}
+
+.search-button {
+  padding: 0.6rem 1.2rem;
+  background-color: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #2563eb;
+}
+
+.assigned-tab {
+  margin-top: 2rem;
+}
+
+.assigned-list {
+  list-style: none;
+  padding: 0;
+}
+
+.assigned-item {
+  background-color: #e0f2fe;
+  margin-bottom: 0.6rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  color: #1e3a8a;
+}
