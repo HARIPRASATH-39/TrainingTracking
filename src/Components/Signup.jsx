@@ -1,38 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import authService from "../services/AuthService"; // adjust path if needed
 
-// Form field configuration
 const signupFields = [
   {
-    id: "id",
+    id: "employeeId",
     label: "ID",
     type: "text",
     placeholder: "Enter your ID",
     colSpan: 1,
   },
   {
-    id: "name",
+    id: "employeeName",
     label: "Name",
     type: "text",
     placeholder: "Enter your name",
     colSpan: 1,
   },
   {
-    id: "email",
+    id: "employeeEmail",
     label: "Email",
     type: "email",
     placeholder: "Enter your email",
     colSpan: 2,
   },
   {
-    id: "password",
+    id: "employeePassword",
     label: "Password",
     type: "password",
     placeholder: "Enter your password",
     colSpan: 1,
   },
   {
-    id: "grade",
+    id: "employeeGrade",
     label: "Grade",
     type: "text",
     placeholder: "Enter your grade",
@@ -41,20 +41,50 @@ const signupFields = [
 ];
 
 function Signup() {
+  const [formData, setFormData] = useState({
+    employeeId: "",
+    employeeName: "",
+    employeeEmail: "",
+    employeePassword: "",
+    employeeGrade: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const response = await authService.register(formData);
+      setMessage("Signup successful!");
+      setTimeout(() => navigate("/login"), 1500);
+    } catch (error) {
+      setMessage(error?.data || "Signup failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4 pt-16">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-lg px-8 py-6">
+      <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg px-8 py-6">
         <h1 className="text-3xl font-bold text-center text-[#000048] mb-6">
           Signup
         </h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {signupFields.map((field) => (
               <div
                 key={field.id}
-                className={`col-span-${field.colSpan} ${
-                  field.colSpan === 2 ? "sm:col-span-2" : ""
-                }`}
+                className={field.colSpan === 2 ? "sm:col-span-2" : ""}
               >
                 <label
                   htmlFor={field.id}
@@ -65,6 +95,9 @@ function Signup() {
                 <input
                   type={field.type}
                   id={field.id}
+                  value={formData[field.id]}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-2 border border-[#000048] rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder={field.placeholder}
                 />
@@ -74,10 +107,21 @@ function Signup() {
 
           <button
             type="submit"
-            className="w-full mt-6 bg-[#000048] text-white py-2 rounded-md hover:bg-[#000060] transition"
+            disabled={loading}
+            className={`w-full mt-6 py-2 rounded-md transition ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-[#000048] text-white hover:bg-[#000060]"
+            }`}
           >
-            Signup
+            {loading ? "Signing up..." : "Signup"}
           </button>
+
+          {message && (
+            <div className="mt-4 text-center text-sm text-red-600">
+              {message}
+            </div>
+          )}
 
           <div className="mt-4 text-center">
             <p className="text-sm text-gray-600">
