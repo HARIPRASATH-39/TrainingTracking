@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import authService from "../services/AuthService";
+import AuthService from "../services/AuthService";
 
 const loginFields = [
   {
@@ -37,11 +37,11 @@ function Login() {
     setMessage("");
 
     try {
-      const response = await authService.login(credentials);
+      const response = await AuthService.login(credentials);
       setMessage("Login successful!");
       sessionStorage.setItem("token", response.token);
       sessionStorage.setItem("grade", response.grade);
-      sessionStorage.setItem("id", response.employeeId);
+      sessionStorage.setItem("employeeId", response.employeeId);
       setTimeout(() => navigate("/home"), 1500);
     } catch (error) {
       setMessage(error?.data || "Login failed. Please try again.");

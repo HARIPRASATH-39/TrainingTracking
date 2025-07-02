@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/Auth`;
 
-const authService = {
+const AuthService = {
   login: async (credentials) => {
     try {
       const response = await axios.post(`${BASE_URL}/login`, credentials);
@@ -22,4 +22,4 @@ const authService = {
   },
 };
 
-export default authService;
+export default AuthService;

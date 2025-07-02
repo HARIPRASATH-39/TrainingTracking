@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import authService from "../services/AuthService"; // adjust path if needed
+import AuthService from "../services/AuthService"; // adjust path if needed
 
 const signupFields = [
   {
@@ -63,7 +63,7 @@ function Signup() {
     setMessage("");
 
     try {
-      const response = await authService.register(formData);
+      const response = await AuthService.register(formData);
       setMessage("Signup successful!");
       setTimeout(() => navigate("/login"), 1500);
     } catch (error) {
