@@ -77,7 +77,7 @@ function Home() {
 
         <div className="text-center mt-10">
           <Link
-            to="/assigned-courses"
+            to="/courses"
             className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-md shadow hover:bg-indigo-700 transition"
           >
             View All Courses ➜

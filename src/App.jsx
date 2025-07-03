@@ -5,6 +5,8 @@ import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import Signup from "./Components/Signup";
 import Profile from "./Components/Profile";
+import CourseForm from "./Components/CourseForm";
+import Course from "./Components/Course";
 
 const App = () => {
   return (
@@ -17,6 +19,9 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/courses" element={<Course />} />
+        <Route path="/courses/add" element={<CourseForm />} />
+        <Route path="/courses/edit/:id" element={<CourseForm />} />
       </Routes>
     </Router>
   );
